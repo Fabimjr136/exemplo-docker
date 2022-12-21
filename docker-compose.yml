@@ -6,13 +6,13 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: passdocker
-      POSTGRES_USER: userdocker
-      POSTGRES_DB: dbdocker
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: drupal
+      POSTGRES_DB: drupal
     volumes:
       - ./postgresql:/var/lib/postgresql
       - ./postgresql_data:/var/lib/postgresql/data
-    ports:- teste
+    ports: 
       - 5432:5432
     healthcheck:
       test:
@@ -32,15 +32,9 @@ services:
       retries: 10
       start_period: 20s
 
-  web:
-    build: .
-    command: npm start
+  drupal:
+    image: drupal
     ports:
-      - '3000:3000'
+      - '8080:80'
     depends_on:
       - postgres
-    environment:
-      DB_HOST: postgres
-      DB_USER: userdocker
-      DB_PASSWORD: passdocker
-      DB_SCHEMA: dbdocker
