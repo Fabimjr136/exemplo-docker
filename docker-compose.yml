@@ -14,23 +14,6 @@ services:
       - ./postgresql_data:/var/lib/postgresql/data
     ports: 
       - 5432:5432
-    healthcheck:
-      test:
-        [
-          'CMD',
-          'pg_isready',
-          '-h',
-          'localhost',
-          '-p',
-          '5432',
-          '-d',
-          'dbdocker',
-          '-U',
-          'userdocker',
-        ]
-      timeout: 3s
-      retries: 10
-      start_period: 20s
 
   drupal:
     image: drupal
